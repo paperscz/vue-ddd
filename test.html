@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DW1AU17</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .fs {
+            font-size: 32px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 括号一对, 布尔值控制,类是否启用 -->
+        <!-- <p :class="{red:isRed,fs:isFs}">在给我两分钟</p>
+        <p :class="cls">开炮</p> -->
+
+        <!-- <input type="checkbox" v-model="isChecked">
+        <input type="text" v-model="message"> -->
+        <!-- <div v-html="message1"></div> -->
+
+        <!-- <div v-text="message2"></div> -->
+        <!-- <div>{{ message1 }}</div>  直接写等于v-text -->
+
+        <!-- <div title="hello">你说把爱渐渐放下会走更远,又何必去改变你...</div>
+        <div v-bind:title="msg">你用你的指尖,阻止我说再见,想象你在身边...</div> -->
+        <!--  简写 -->
+        <!-- <div :title="msg">你用你的指尖,阻止我说再见,想象你在身边...</div> -->
+
+        <!-- <button v-on:click="fn(13456)">按钮1</button>
+        <button @click="again($event,123)">按钮2</button> -->
+        <!-- <button @click="函数名"></button> -->
+        <!-- <button v-on:click="函数名(可传参)"></button> -->
+
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 使用vue的步骤        
+        // 1. 安装
+        // 2. 引入vue.js(不能用vue.min.js)
+        // 3. 创建实例vm
+
+
+        // 4个指令
+        // v-model
+        // v-bind  ==> 简写 :   (v-bind:class=""   /  :class="")
+        // v-html / v-text
+        // v-on ==> 简写 @   (v-on:click="fn"  / @click="fn")
+
+
+
+
+        // Vue.config.devtools = true
+
+        // 指令1 v-model (绑定在选择框,绑定的是选中的状态)
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {
+        //         isChecked: true,
+        //         message: "kuanglang"
+        //     }
+        // })
+
+        // 指令2 v-html v-text
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {
+        //         message1: "<h1>标题1</h1>",
+        //         message2: "<h1>标题2</h1>",
+        //         num: 1000
+        //     }
+        // })
+
+        // 指令3 v-bind 动态绑定数据(单向的)
+        // 因为{{}} 不能出现在属性上
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {
+        //         msg: "112233"
+        //     }
+        // })
+
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {
+        //         cls: "red",
+        //         isRed: true,
+        //         isFs: true
+        //     }
+        // })
+
+        // 指令4 
+        // v-on 注册事件/绑定事件
+        // 函数都放在 methods 对象中
+        // v-on:click = "fn"
+        // 简写 @click = "fn"
+
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {
+        //         msg: 'adu'
+        //     },
+        //     methods: {
+        //         // fn: function() {}
+        //         // 简写 es6
+        //         fn(num) {
+        //             console.log("点击" + num)
+        //         },
+        //         again(e, num) {
+        //             console.log(this)
+        //             console.log(this.msg)
+        //             console.log(this === vm)  //true
+        //             console.log(e, num)
+        //         }
+        //     }
+        // })
+
+
+
+
+
+
+
+        // 双向绑定底层实现的原理  ==> Object.definePropert(对象,属性名,属性修饰)
+        // Object.definePropert 存在兼容 IE8下不兼容 
+        // Object.definePropert --> 修改/获取属性
+
+        // V ==> M 视图层 到 数据层
+        // 1. 获取输入框
+        // 2. 注册oninput事件,在参数改变时触发
+        // 3. 获取输入框的值
+        // 4. 赋值给obj.name
+
+        // M ==> V 数据层 到 试图层
+        // 1. 控制台测试 obj.name = 'zs' 测试
+        // 2. 在调用的set函数中
+        // 3. 把值赋值给input输入框的值
+
+
+
+        // let obj = {}
+        // let temp = ''
+        // let txt = document.querySelector("input")
+        // txt.oninput = function() {  //oninput事件,在值改变时就会触发
+        //     obj.name = this.value
+        // }
+
+        // Object.defineProperty(obj, 'name', {
+        //     // set: function (v) {
+        //     //     // 保存设置的值,存到临时变量中
+        //     //     temp = v
+        //     //     txt.value = temp
+        //     // },
+        //     // get: function () {
+        //     //     // 返回临时变量
+        //     //     return temp
+        //     //     return obj.name  //会死循环, 借助临时变量
+        //     // }
+        //     // 简写
+        //     set(v) {  
+        //         temp = v
+        //         txt.value = temp 
+        //     },
+        //     get() { return temp }
+        // })
+
+
+        // // 在开发者工具栏中显示vue
+        // Vue.config.devtools = true
+
+        // // 1. 引入vue.js
+        // // 2. 实例化vm对象
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {
+        //         name: "kuanglang"
+        //     }
+        // })
+
+
+
+        // Vue.config.devtools = true;
+        // 1. 安装vue
+        // 2. script引入vue
+        // 3. 实例化vue对象
+        // const vm = new Vue({
+        //     // el (element) 作用:指定vue管理的边界 (管理id为app的这块区域) 推荐用id,也可以用类class
+        //     el: "#app",
+        //     // data: vue里所有的数据都在data里, 作用: 存放数据,供 视图view 使用,数据可直接访问
+        //     data: {
+        //         name: "adu",
+        //         age: 18
+        //     },
+        //     methods: {
+        //         //放函数
+        //     }
+        // })
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
