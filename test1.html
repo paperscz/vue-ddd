@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DW1AU17</title>
+</head>
+
+<body>
+    <!-- 响应式: 正常的实现了数据的绑定,就是响应式完成 -->
+
+    <div id="app">
+        <!-- <input type="text" v-model="obj.name">
+        <button @click="fn">按钮</button> -->
+
+        <p v-for="(item,index) in list" :key="item.id">
+            {{ item.name }} <input type="text">
+        </p>
+
+        <!-- 默认情况下,会跳转 -->
+        <!-- 要组织 -->
+        <a @click.prevent href="https://www.baidu.com/">百度</a>
+
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                obj: {
+                    // name: "lll",
+                },
+                list: [
+                    { id: 1, name: "zs" },
+                    { id: 2, name: "ls" },
+                    { id: 3, name: "ws" },
+                ]
+            },
+            methods: {
+                fn() {
+                    // 在数据中没有name值,在点击按钮时添加的话,已经晚了,无法实现数据劫持,就不能正产响应
+                    // 数据劫持: 就是通过object.defineProroty设置get和set;
+                    // data中已经存在的属性可以进行劫持
+                    // this.obj.name = "ooo"
+
+                    // 第三方框架中,需要后来参与响应的情况
+                    // this.$set(this.obj,"name","adu")
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>

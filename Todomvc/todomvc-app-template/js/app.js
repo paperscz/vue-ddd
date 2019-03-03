@@ -54,6 +54,12 @@
 		computed:{
 			showStatus() {
 				return this.list.length > 0
+			},
+			showUnDone() {
+				return this.list.filter(item => item.status == false).length
+			},
+			showClearCompleted() {
+				return this.list.some(item => item.status == true)
 			}
 		},
 		directives: {

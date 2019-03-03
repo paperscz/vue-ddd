@@ -28,8 +28,8 @@
 				<!-- completad 决定是否选中 / editing决定是否是编辑状态  -->
 				<li :class="{ completed: item.status, editing: editId == item.id } " v-for="(item,index) in list">
 					<div class="view">
-						<input class="toggle" type="checkbox" v-model="item.status" @dblclick="editData(item.id)" @focus>
-						<label>{{ item.name }}</label>
+						<input class="toggle" type="checkbox" v-model="item.status" @focus>
+						<label @dblclick="editData(item.id)">{{ item.name }}</label>
 						<button class="destroy" @click="destroyItem( item.id )"></button>
 					</div>
 					<input class="edit" v-model="item.name" @keyup.13="closeEdit" @blur="closeEdit" v-todo-focus>
@@ -40,21 +40,9 @@
 		<!-- 底部 -->
 		<footer class="footer" v-show="showStatus">
 			<!-- This should be `0 items left` by default -->
-			<span class="todo-count"><strong>0</strong> item left</span>
-			<!-- Remove this if you don't implement routing -->
-			<ul class="filters">
-				<li>
-					<a class="selected" href="#/">All</a>
-				</li>
-				<li>
-					<a href="#/active">Active</a>
-				</li>
-				<li>
-					<a href="#/completed">Completed</a>
-				</li>
-			</ul>
+			<span class="todo-count"><strong>{{ showUnDone }}</strong> item left</span>
 			<!-- Hidden if no completed items are left ↓ -->
-			<button class="clear-completed">Clear completed</button>
+			<button class="clear-completed" v-show="showClearCompleted">Clear completed</button>
 		</footer>
 	</section>
 
