@@ -1,18 +1,26 @@
 (function (window) {
 	'use strict';
 
+	let list = JSON.parse(localStorage.getItem("list")) || []
+
 	// Your starting point. Enjoy the ride!
 	const vm = new Vue({
 		el: "#app",
 		data: {
-			list: [
-				{ id: 1, name: "旅游环节", status: false },
-				{ id: 2, name: "屠杀环节", status: false },
-				{ id: 3, name: "吸金环节", status: true }
-			],
+			list,
 			inputValue: '',
 			editId: -1,
 			focusStatus: false,
+		},
+		watch: {
+			// 监听器
+			list: {
+				deep: true,
+				handler(newVal) {
+					// newVal是这个数组
+					localStorage.setItem("list", JSON.stringify(newVal))
+				}
+			}
 		},
 		methods: {
 			// 删除数据
@@ -51,7 +59,7 @@
 				this.editId = -1
 			}
 		},
-		computed:{
+		computed: {
 			showStatus() {
 				return this.list.length > 0
 			},

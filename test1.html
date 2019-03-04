@@ -15,29 +15,56 @@
         <!-- <input type="text" v-model="obj.name">
         <button @click="fn">按钮</button> -->
 
-        <p v-for="(item,index) in list" :key="item.id">
+        <!-- <p v-for="(item,index) in list" :key="item.id">
             {{ item.name }} <input type="text">
-        </p>
+        </p> -->
 
         <!-- 默认情况下,会跳转 -->
         <!-- 要组织 -->
-        <a @click.prevent href="https://www.baidu.com/">百度</a>
+        <!-- <a @click.prevent href="https://www.baidu.com/">百度</a> -->
+
+
+        <!-- 使用过滤器:   date | formatFilter -->
+        <p>{{ date | formatFilter }}</p>
+        <p>{{ date | momentFilter }}</p>
 
     </div>
 
     <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/moment/moment.js"></script>
     <script>
+        // 注册全局过滤器
+        // Vue.filter("过滤器名",(res:要处理的值)回调)
+        // res 就是 date 的值
+        // 一定要有返回值 return
+        Vue.filter("formatFilter", res => {
+            // 可以使用模板字符串 蠢方法  ${} 可以解析变量
+            return `${res.getFullYear()}-${res.getMonth()}-${res.getDate()}`
+        })
+
+        // 借用moment.js(日期处理类库)配合过滤器处理日期
+        // 安装moment
+        // 引入
+        // 注册过滤器
+
+        // moment().format('MMMM Do YYYY, h:mm:ss a')
+        Vue.filter("momentFilter", res => {
+            return moment(res).format('YYYY-MM-DD hh:mm:ss')
+        })
+
+
         const vm = new Vue({
             el: "#app",
             data: {
-                obj: {
-                    // name: "lll",
-                },
-                list: [
-                    { id: 1, name: "zs" },
-                    { id: 2, name: "ls" },
-                    { id: 3, name: "ws" },
-                ]
+                date: new Date()
+                // obj: {
+                //     // name: "lll",
+                // },
+                // list: [
+                //     { id: 1, name: "zs" },
+                //     { id: 2, name: "ls" },
+                //     { id: 3, name: "ws" },
+                // ]
             },
             methods: {
                 fn() {
@@ -49,7 +76,6 @@
                     // 第三方框架中,需要后来参与响应的情况
                     // this.$set(this.obj,"name","adu")
                 }
-
             }
         })
     </script>

@@ -60,3 +60,9 @@
     1. 当选中大于一个时,显示clear completed (使用计算属性)
         (数组遍历some,当满足一个或多个时返回true)
 
+## 十一. 数据持久化 ==> 数据保存到本地(localstorage.setItem()) ==> 监听数组变化(保存到本地)
+    1. watch 监听器
+    2. 保存到localStorage中(转成json格式字符串)
+    3. data 中的list也要从本地获取
+
+    
