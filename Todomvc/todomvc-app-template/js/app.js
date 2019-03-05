@@ -1,16 +1,22 @@
 (function (window) {
 	'use strict';
 
-	let list = JSON.parse(localStorage.getItem("list")) || []
+	// let list = JSON.parse(localStorage.getItem("list")) || []
 
 	// Your starting point. Enjoy the ride!
 	const vm = new Vue({
 		el: "#app",
 		data: {
-			list,
+			list: [],
 			inputValue: '',
 			editId: -1,
 			focusStatus: false,
+		},
+		created() {
+			// 从模拟的服务器接口中,获取胡数据
+			axios.get("http://localhost:3000/list").then(res => {
+				this.list = res.data || []
+			})
 		},
 		watch: {
 			// 监听器
@@ -29,14 +35,16 @@
 			// 	this.list.splice(index, 1)
 			// }
 			// 方法2: 通过过滤 
-			// destroyItem(id) {
-			// 	this.list = this.list.filter( item => item.id != id )
-			// }
-			// 方法3: 通过id -> index ->splice
 			destroyItem(id) {
-				let index = this.list.findIndex(item => item.id == id)
-				this.list.splice(index, 1)
+				axios.delete(`http://localhost:3000/list/${id}`).then(() => {
+					this.list = this.list.filter(item => item.id != id)
+				})
 			},
+			// 方法3: 通过id -> index ->splice
+			// destroyItem(id) {
+			// 	let index = this.list.findIndex(item => item.id == id)
+			// 	this.list.splice(index, 1)
+			// },
 			// 保存数据
 			saveDate() {
 				if (this.inputValue.trim() == '') {
