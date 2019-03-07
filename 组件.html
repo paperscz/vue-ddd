@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DW1AU17</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用组件: 当成标签使用 -->
+        <world></world>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 注册全局组件
+        // Vue.component(组件名,{配置项})
+        Vue.component("world", {
+            template: `
+                <div>
+                    <h1>hello Vue</h1>
+                    <h1>give me five</h1>
+                </div>
+            `
+        })
+
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+
+            }
+        })
+
+        /*
+            1. 注册全局组件, 要在实例vm前注册
+
+            2. template中只能有一个根节点,要多节点,则包起来
+
+            3. 组件的配置项基本和vm实例的配置项时一样的
+                (data,methods,computed,watch)
+
+            4. 但是data是一个函数, 不是对象(为什么组件中的data是函数)
+            答: 组件可被复用, 数据不被共享
+        
+            5. 组件: 是一个独立的,封闭的个体 (组件之间不能互相访问)
+
+            6. 需要通过 '组件的通讯' 来访问其他组件的数据
+                1. 父组件(实例vm) -> 子组件
+                2. 子组件 -> 父组件
+                3. 非父子之间的传递
+
+        */
+
+
+        // function Adu() { }
+        // Adu.prototype.data = {
+        //     num: 10
+        // }
+
+        // let a = new Adu()
+        // let b = new Adu()
+
+        // console.log(a.data.num,b.data.num)
+        // a.data.num = 200;
+        // console.log(a.data.num,b.data.num)
+        // 可被更改
+
+        // Adu.prototype.data = () => {
+        //     return {
+        //         num : 100
+        //     }
+        // }
+        // console.log(a.data().num,b.data().num)
+        // a.data().num = 999;
+        // console.log(a.data(),b.data().num)
+        
+
+
+
+
+
+    </script>
+</body>
+
+</html>

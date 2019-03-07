@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DW1AU17</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <!-- <p v-if="num >= 30">大哥</p>
+        <p v-else-if="num >= 20 && num < 30">二哥</p>
+        <p v-else="num <= 20">三哥</p> -->
+
+        <!-- <p>{{ num }}</p>
+        <p v-pre>{{ num }}</p> -->
+
+        <!-- <p>{{ num }}</p>
+        <p v-once>{{ num }}</p> -->
+
+        <p>{{ str }}</p>
+        <p>{{ str }}</p>
+        <p>{{ str }}</p>
+        <p>{{ str }}</p>
+        <p>{{ str }}</p>
+        <p>{{ str }}</p>
+    </div>
+    
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 指令 v-if / v-else-fi / v-else
+
+        // v-once 只解析一次,后面数据发生改变,标签内容也不会变
+
+        // v-pre 跳过 该标签不解析
+
+        // v-cloak 解决{{}} 页面渲染时,闪一下的问题
+        //         要遮盖的标签添加 这个指令
+        //         在css样式中, 设置一个属性选择器样式display:none
+        //         当数据解析后,会自动删掉v-cloak
+        //         多个元素要遮盖,给父设置
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                num: 33,
+                str: "伊娃伊玛迭"
+            }
+        })
+    </script>
+</body>
+</html>

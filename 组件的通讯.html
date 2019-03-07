@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DW1AU17</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 第一步: 父组件通过属性,把数据传送给子组件 -->
+        <!-- <child :msg="pmsg" :again="pagain"></child> -->
+
+        <!-- 第二步(z->f):  -->
+        <child @fn="pfn"></child>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        /*
+            组件的通讯 -->  父传子
+            步骤:
+                第一步:  父组件通过属性, 将数据传递给子组件
+                        <child :子数据名="父数据名"></child>
+                第二部:  子组件里配置项 `props` ,接受数据
+                        props: ['msg']  
+        */
+
+        // Vue.component("child", {
+        //     template: ` 
+        //         <div>
+        //             <h1> {{ msg }} </h1>    
+        //             <h1> {{ again }} </h1>    
+        //         </div>
+        //     `,
+        //     // 第二步, 子组件配置项props 保存数据
+        //     props: ["msg", "again"]
+        // })
+
+
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {
+        //         pmsg: "来自爸爸的爱,发射,咻咻咻",
+        //         pagain: "又来了"
+        //     }
+        // })
+
+
+
+        /*
+            组件的通讯 -->  子传父
+                1.  父组件准备一个方法
+                2.  通过自定义事件,将父组件的方法,传递给自组件 @子方法名="父方法名"
+                3.  子组件内执行在这个方法 this.$emit('fn',this.msg)
+        
+        */
+
+        Vue.component("child", {
+            template: ` 
+                    <h1> {{ msg }} </h1>    
+            `,
+            data() {
+                return {
+                    msg : "不孝子发来电报"
+                }
+            },
+            created() {
+                // 第三步(z->f)
+                // 在子组件内执行传递过来的方法
+                // $emit 触发/发射
+                this.$emit("fn",this.msg)   //把数据msg发送父组件(父组件形参接受)
+            }
+        })
+
+
+        const vm = new Vue({
+            el: "#app",
+            data: {},
+            methods: {
+                // 第一步(z->f): 在父组件准备一个方法
+                pfn(data) {
+                    console.log("不孝子发来:"+ data)
+                }
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

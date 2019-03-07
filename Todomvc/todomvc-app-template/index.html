@@ -9,10 +9,16 @@
 	<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
 	<!-- CSS overrides - remove if you don't need it -->
 	<link rel="stylesheet" href="css/app.css">
+	<style>
+		[v-cloak] {
+			display: none
+		}
+	
+	</style>
 </head>
 
 <body>
-	<section class="todoapp" id="app">
+	<section class="todoapp" id="app" v-cloak> 
 		<!-- 头部 -->
 		<header class="header">
 			<h1>todos</h1>
@@ -28,11 +34,11 @@
 				<!-- completad 决定是否选中 / editing决定是否是编辑状态  -->
 				<li :class="{ completed: item.status, editing: editId == item.id } " v-for="(item,index) in list">
 					<div class="view">
-						<input class="toggle" type="checkbox" v-model="item.status" @focus>
+						<input @input="changeStatus(item.id)" class="toggle" type="checkbox" v-model="item.status" @focus>
 						<label @dblclick="editData(item.id)">{{ item.name }}</label>
 						<button class="destroy" @click="destroyItem( item.id )"></button>
 					</div>
-					<input class="edit" v-model="item.name" @keyup.13="closeEdit" @blur="closeEdit" v-todo-focus>
+					<input class="edit" v-model="item.name" @keyup.enter="closeEdit" v-todo-focus>
 				</li>
 			</ul>
 		</section>
@@ -42,7 +48,7 @@
 			<!-- This should be `0 items left` by default -->
 			<span class="todo-count"><strong>{{ showUnDone }}</strong> item left</span>
 			<!-- Hidden if no completed items are left ↓ -->
-			<button class="clear-completed" v-show="showClearCompleted">Clear completed</button>
+			<button class="clear-completed" v-show="showClearCompleted" @click="clearComleted()">Clear completed</button>
 		</footer>
 	</section>
 
