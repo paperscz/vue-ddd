@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DW1AU17</title>
+</head>
+<body>
+    <div id="app">
+
+        <p ref="gk">狗空</p>
+        <p ref="xsg">小神官</p>
+        <zamasi ref="zms"></zamasi>
+    </div>
+    
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        /* 
+            $refs 作用: 获取标签 / 组件 
+            $refs是一个对象 , 里面是注册过的标签 / 组件
+            ref属性 , 相当于DOM中的id ,class
+
+            使用: 注册ref 给标签添加ref属性 'ref="名"
+            获取: this.$refs.名    -> 拿到的是整个标签
+            (如果是组件,可直接获取数据)
+        */
+       Vue.component("zamasi", {
+           template: `
+                <p> 砸马斯 </p>
+           `,
+           data() {
+               return {
+                   name: "砸马斯"
+               }
+           }
+       })
+
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                
+            },
+            created() {
+                // 数据初始化,还获取不到
+                console.log(this.$refs)
+            },
+            mounted() {
+                // 渲染完后才能获取
+                console.log(this.$refs.gk);
+                console.log(this.$refs.xsg);
+                console.log(this.$refs.zms.name);  //组件可获取数据
+                
+            }
+        })
+    </script>
+</body>
+</html>

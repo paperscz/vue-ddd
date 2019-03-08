@@ -1,8 +1,8 @@
 Vue.component("todo-footer", {
     template: `
-        <footer class="footer">
-            <span class="todo-count"><strong>0</strong> item left</span>
-            <!-- Remove this if you don't implement routing -->
+        <footer class="footer" v-show="isFooterShow">
+            <span class="todo-count"><strong>{{ completedNum }}</strong> item left</span>
+        
             <ul class="filters">
                 <li>
                     <a class="selected" href="#/">All</a>
@@ -14,8 +14,14 @@ Vue.component("todo-footer", {
                     <a href="#/completed">Completed</a>
                 </li>
             </ul>
-            <!-- Hidden if no completed items are left ↓ -->
-            <button class="clear-completed">Clear completed</button>
+            
+            <button v-show="isCompletedShow" class="clear-completed" @click="clearCompleted">Clear completed</button>
         </footer>
-    `
+    `,
+    props: ["isFooterShow","completedNum","isCompletedShow"],
+    methods: {
+        clearCompleted() {
+            this.$emit("clear-completed")
+        }
+    }
 })

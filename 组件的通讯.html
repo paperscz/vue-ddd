@@ -14,11 +14,90 @@
         <!-- <child :msg="pmsg" :again="pagain"></child> -->
 
         <!-- 第二步(z->f):  -->
-        <child @fn="pfn"></child>
+        <!-- <child @Cfn="pfn"></child> -->
+
+        <!-- <goukong></goukong>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <dashenguan></dashenguan>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <goukong></goukong>
+        <dashenguan></dashenguan>
+
     </div>
 
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script>
+
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                goukong: {
+                    template: `<h1> {{ name }} </h1>`,
+                    data() {
+                        return {
+                            name: "狗空"
+                        }
+                    }
+                },
+                dashenguan: {
+                    template: `<h1> {{ name }} </h1>`,
+                    data() {
+                        return {
+                            name: "小神官"
+                        }
+                    }
+                }
+            }
+        })
+
+
+
+        /*
+            非父子之间的传递
+            1. 声明事件总线(空的实例)
+            2. 触发事件(发送者)
+            3. 注册事件(接受者)
+        */
+        // 第一步. 事件总线
+        // const bus = new Vue()
+
+        // Vue.component("goukong", {
+        //     template: `
+        //         <h1 @click="send"> 狗空桑 </h1>
+        //     `,
+        //     methods: {
+        //         // 第二步,触发事件 bus.$emit(事件名称,要发送的值)
+        //         send() {
+        //             bus.$emit("power", "自在极意功")
+        //         }
+        //     }
+        // })
+
+        // Vue.component("dashenguan", {
+        //     template: `
+        //         <h1> 大神官 </h1>
+        //     `,
+        //     created() {
+        //         // 第三步: 接受数据->注册事件(接受的数据在回调里面)
+        //         bus.$on("power", res => {
+        //             console.log("来自狗空的:" + res)
+        //         })
+        //     }
+        // })
+
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {
+
+        //     }
+        // })
+
         /*
             组件的通讯 -->  父传子
             步骤:
@@ -58,34 +137,34 @@
         
         */
 
-        Vue.component("child", {
-            template: ` 
-                    <h1> {{ msg }} </h1>    
-            `,
-            data() {
-                return {
-                    msg : "不孝子发来电报"
-                }
-            },
-            created() {
-                // 第三步(z->f)
-                // 在子组件内执行传递过来的方法
-                // $emit 触发/发射
-                this.$emit("fn",this.msg)   //把数据msg发送父组件(父组件形参接受)
-            }
-        })
+        // Vue.component("child", {
+        //     template: ` 
+        //             <h1> {{ msg }} </h1>    
+        //     `,
+        //     data() {
+        //         return {
+        //             msg : "不孝子发来电报"
+        //         }
+        //     },
+        //     created() {
+        //         // 第三步(z->f)
+        //         // 在子组件内执行传递过来的方法
+        //         // $emit 触发/发射
+        //         this.$emit("cfn",this.msg)   //把数据msg发送父组件(父组件形参接受)
+        //     }
+        // })
 
 
-        const vm = new Vue({
-            el: "#app",
-            data: {},
-            methods: {
-                // 第一步(z->f): 在父组件准备一个方法
-                pfn(data) {
-                    console.log("不孝子发来:"+ data)
-                }
-            }
-        })
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {},
+        //     methods: {
+        //         // 第一步(z->f): 在父组件准备一个方法
+        //         pfn(data) {
+        //             console.log("不孝子发来:"+ data)
+        //         }
+        //     }
+        // })
 
 
     </script>

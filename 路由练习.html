@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DW1AU17</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- 1. 入口 -->
+        <router-link to="/gk">狗空</router-link>
+
+        <!-- 4.出口 -->
+        <router-view></router-view>
+
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+
+        // 3. 注册组件
+        let GK = {
+            template: `
+                <p> 狗空 </p>
+            `
+        }
+
+        // 2. 实例化路由
+        const router = new VueRouter({
+            //配置, 和vue配对3
+            routes: [{ path: "/gk", component: GK}]
+        })
+
+
+        const vm = new Vue({
+            el: "#app",
+            router,
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

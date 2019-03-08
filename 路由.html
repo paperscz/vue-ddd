@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DW1AU17</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- 1. 入口 -->
+        <router-link to="/gk">狗空</router-link>
+        <!-- 会自动转为a标签 -->
+        <!-- <a href="#/gk">狗空</a> -->
+
+        <!-- 4. 出口,占位置(固定写法) -->
+        <router-view></router-view>
+
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+        /*
+            路由(vue-router) 
+                1. 安装 npm i vue-router
+                2. 引入
+                使用: 
+                0. 实例化路由
+                1. 入口 
+                    方式1: url作为地址
+                    方式2: 导航<router-link to="/one">one</router-link>
+                2. 设置路由匹配规则(路由和vue关联起来)
+                3. 注册组件 (要放在路由之前)
+                4. 出口  <router-view></router-view>
+        */
+
+        // 3. 注册组件 (参与路由匹配的是注册组件的返回值)
+        let GK = Vue.component("gk", {
+            template: `
+                <p> 子组件: 狗空 </p>
+            `
+        })
+
+        // 0. 实例化路由
+        const router = new VueRouter({
+            // 2. 设置路由规则 (并和vue关联)
+            routes: [
+                { path: "/gk", component: GK }
+            ]
+        })
+
+        const vm = new Vue({
+            el: "#app",
+            router,
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
